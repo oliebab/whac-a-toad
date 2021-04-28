@@ -89,6 +89,19 @@ header {
     margin-left: 25px;
 }
 
+.toad {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    background: url('./images/Toad.svg');
+    position: absolute;
+    top: 95%;
+    transition: top 0.15s ease-in;
+    width: 150px;
+    height: 150px;
+    margin-left: 50px;
+}
+
 .bomb {
     display: flex;
     justify-content: center;
@@ -99,7 +112,7 @@ header {
     transition: top 0.15s ease-in;
     width: 150px;
     height: 150px;
-    margin-left: 37px;
+    margin-left: 65px;
 }
 
 .coin {
@@ -112,16 +125,14 @@ header {
     transition: top 0.1s ease-in;
     width: 150px;
     height: 150px;
-    margin-left: 25px;
+    margin-left: 50px;
 }
 
  .mole.up {
     top: 0; 
 }
 
-.red {
-    background-color: red;
-}
+
 
 
 

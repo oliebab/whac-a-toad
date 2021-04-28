@@ -7,40 +7,57 @@ const resetBtn = document.getElementById("reset-btn");
 
 let timeRemaining = 10;
 let defaultScore = 0;
-let timeUp = false;
+let gameIsOn = true;
+
+// Select a random hole for the mole to pop up, using a random index
+function randomHole() {
+  const holeIndex = Math.floor(Math.random() * 9);
+  const selectedHole = holes[holeIndex];
+  return selectedHole;
+}
+
+// Select a random mole (Toad, Coin or Bomb) that pops up in the selected hole
+
+function randomMole() {
+
+  // const holeIndex = Math.floor(Math.random() * 9);
+  // const currentHole = holes[holeIndex];
+  const currentHole = randomHole(holes);
+  console.log(currentHole);
+
+  const moleIndex = Math.floor(Math.random() * 3);
+  let getToad = currentHole.querySelector(".toad");
+  let getBomb = currentHole.querySelector(".bomb");
+  let getCoin = currentHole.querySelector(".coin");
+  let possibilitiesArray = [getToad, getBomb, getCoin];
+  let currentMole = possibilitiesArray[moleIndex];
+  
+  console.log("coucou", currentMole);
+  // let randomizer = currentHole.currentMole
+  // console.log(randomizer);
+  return currentMole;
+}
 
 // Set a random timer for the mole to pop up
 function randomPeepTime(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-// Select a random hole for the mole to pop up, using a random index
-function randomHole() {
-  const holeIndex = Math.floor(Math.random() * 9);
-  const selectedHole = holes[holeIndex];
-  console.log(selectedHole);
-  return selectedHole;
-}
-
-// Select a random mole (Toad, Coin or Bomb) that pops up in the selected hole
-
-// function randomMole() {
-//     const moleIndex = Math.floor(Math.random() * 3);
-//     const selectedMole = moles[moleIndex];
-//     return selectedMole;
-// }
-
 // Get the mole to pop up from the selected hole
 
 function molePeeps() {
   const timer = randomPeepTime(400, 900);
   console.log(timer);
-  const currentHole = randomHole(holes);
-  console.log(currentHole);
-  currentHole.querySelector(".mole").classList.add("up");
+  // const currentHole = randomHole(holes);
+  const currentMole = randomMole();
+  // console.log(currentHole);
+  currentMole.classList.add("up"); // HELP : UNDEFINED
+  console.log(currentMole.classList.add("up")); // HELP : UNDEFINED
   setTimeout(() => {
-    currentHole.querySelector(".mole").classList.remove("up");
-    molePeeps();
+    currentMole.classList.remove("up"); // HELP : UNDEFINED
+    if (gameIsOn) {
+        molePeeps();
+    }
   }, timer);
 }
 
@@ -52,6 +69,7 @@ let countdownChrono = () => {
     if (timeRemaining === 0) {
       clearInterval(intervalId);
       console.log("GAME OVER");
+    //   alert("GAME OVER");
     }
   }, 1000);
 };
@@ -68,28 +86,10 @@ moles.forEach((mole) => mole.addEventListener("click", hitTheMole));
 // Function start game, enables molePeeps until chrono = 0
 
 function play() {
+    gameIsOn = true;
     countdownChrono();
-    molePeeps();
+    molePeeps(); 
+    setTimeout(() => gameIsOn = false, (timeRemaining)*1000);
 }
 
 startBtn.addEventListener("click", play);
-
-// function reset() {
-//     timeRemaining = 10;
-//     defaultScore = 0;
-// }
-
-// resetBtn.addEventListener("click", reset);
-
-
-
-
-// start.addEventListener("click", play());
-
-// play();
-
-// const revealBitchSection = () => {
-//     bitchSection.classList.toggle("hidden")
-//   }
-
-//   magicBtn.addEventListener("click", revealBitchSection)
