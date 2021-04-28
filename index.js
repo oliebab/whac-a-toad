@@ -2,10 +2,12 @@ const holes = document.querySelectorAll(".hole");
 const moles = document.querySelectorAll(".mole");
 const chrono = document.getElementById("chrono");
 const score = document.getElementById("score");
-const start = document.getElementById("start-btn");
+const startBtn = document.getElementById("start-btn");
+const resetBtn = document.getElementById("reset-btn");
 
 let timeRemaining = 10;
 let defaultScore = 0;
+let timeUp = false;
 
 // Set a random timer for the mole to pop up
 function randomPeepTime(min, max) {
@@ -23,12 +25,15 @@ function randomHole() {
 // Select a random mole (Toad, Coin or Bomb) that pops up in the selected hole
 
 // function randomMole() {
+//     const moleIndex = Math.floor(Math.random() * 3);
+//     const selectedMole = moles[moleIndex];
+//     return selectedMole;
 // }
 
 // Get the mole to pop up from the selected hole
 
 function molePeeps() {
-  const timer = randomPeepTime(500, 1000);
+  const timer = randomPeepTime(400, 900);
   console.log(timer);
   const currentHole = randomHole(holes);
   console.log(currentHole);
@@ -39,7 +44,7 @@ function molePeeps() {
   }, timer);
 }
 
-// Chronometer Function XXX HELP
+// Chronometer Function
 
 let countdownChrono = () => {
   const intervalId = setInterval(() => {
@@ -51,26 +56,37 @@ let countdownChrono = () => {
   }, 1000);
 };
 
+// Function hit : add points when click event, mole goes down
+function hitTheMole() {
+    const currentHole = randomHole(holes);
+    score.textContent++;
+    currentHole.querySelector(".mole").classList.remove("up");
+  }
+  
+moles.forEach((mole) => mole.addEventListener("click", hitTheMole));
+
 // Function start game, enables molePeeps until chrono = 0
 
-function play(evt) {
-    setTimeout(() => {
-        countdownChrono();
-        molePeeps();
-    }, 10000)
+function play() {
+    countdownChrono();
+    molePeeps();
 }
 
-function hitTheMole() {
-  const currentHole = randomHole(holes);
-  score.textContent++;
-  currentHole.querySelector(".mole").classList.remove("up");
-}
+startBtn.addEventListener("click", play);
 
-moles.forEach((mole) => mole.addEventListener("click", hitTheMole));
+// function reset() {
+//     timeRemaining = 10;
+//     defaultScore = 0;
+// }
+
+// resetBtn.addEventListener("click", reset);
+
+
+
 
 // start.addEventListener("click", play());
 
-play();
+// play();
 
 // const revealBitchSection = () => {
 //     bitchSection.classList.toggle("hidden")

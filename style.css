@@ -76,7 +76,7 @@ header {
     bottom:-66px; 
 }
 
-.mole1 {
+.mole {
     display: flex;
     justify-content: center;
     background-color: white;
@@ -89,7 +89,7 @@ header {
     margin-left: 25px;
 }
 
-.mole2 {
+.bomb {
     display: flex;
     justify-content: center;
     background-color: white;
@@ -102,7 +102,7 @@ header {
     margin-left: 37px;
 }
 
-.mole {
+.coin {
     display: flex;
     justify-content: center;
     background-color: white;
