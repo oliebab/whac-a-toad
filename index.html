@@ -14,63 +14,58 @@
 
         <h1>Whac a Toad !</h1>
 
-        <h2>Score : <span id="score">0</span> Time left : <span id="chrono">10</span> </h2>
+        <!-- <h2>Score : <span id="score">0</span> Time left : <span id="chrono">10</span> </h2> -->
+        <div id="audio">
+            <audio autoplay="" loop="" id="music" src="./music/06 Field First.mp3"></audio>
+        </div>
         <div id="button-row">
-            <button id="start-btn" class="button">Play</button>
-            <button id="reset-btn" class="button">Reset</button>
+            <img id="start-btn" class="button" src="./images/play-round.svg">
+            <img id="play-btn" class="button" onclick="document.getElementById('music').play()" src="./images/audio-tune.svg" alt="">
+            <img id="pause-btn" class="button" onclick="document.getElementById('music').pause()"src="./images/volume-mute.svg" alt="">
         </div>
         
-    </header>   
+    </header>
+    
+    <aside id="infos">
+        <p>Score : <span id="score">0</span></p>
+        <p>Time Left : <span id="chrono">0</span></p>
+    </aside>
 
     <div id="grid">
 
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         <div class="hole">
-            <div class="mole toad"></div>
-            <div class="mole bomb"></div>
-            <div class="mole coin"></div>
+            <div class="mole"></div>
         </div>
         
     </div>
+
+    <footer>
+        
+    </footer>
 </body>
 </html>
 
