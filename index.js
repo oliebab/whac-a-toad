@@ -5,16 +5,27 @@ const score = document.getElementById("score");
 const startBtn = document.getElementById("start-btn");
 const resetBtn = document.getElementById("reset-btn");
 
+//audio elements
+const mainMusic = document.getElementById("music");
+const winMusic = document.getElementById("win-music");
+const successMusic = document.getElementById("success-music");
+const loseMusic = document.getElementById("lose-music");
+const hitBomb = document.getElementById("bomb-music");
+const hitCoin = document.getElementById("coin-music");
+//  
+
+
 let intervalIdChrono;
 let intervalIdMoles;
-let timeRemaining = 10;
+let timeRemaining = 5;
 let defaultScore = 0;
 let gameIsOn = true;
-// music.autoplay;
+
+music.autoplay;
 
 // Select a random hole for the mole to pop up, using a random index
 function randomHole() {
-  const holeIndex = Math.floor(Math.random() * 6);
+  const holeIndex = Math.floor(Math.random() * 8);
   const selectedHole = holes[holeIndex];
   console.log("which hole ??????", selectedHole);
   return selectedHole;
@@ -61,16 +72,22 @@ function randomPeepTime(min, max) {
 // Get the selected mole to pop up from the selected hole
 
 function molePeeps() {
-  const timer = randomPeepTime(500, 1200);
+  const timer = randomPeepTime(500, 1000);
   const thisMolePeeps = randomMole();
   if (thisMolePeeps.classList.contains("up")) return;
   thisMolePeeps.classList.add("up");
   setTimeout(() => {
     thisMolePeeps.classList.remove("up");
+    setTimeout(() => {
+      thisMolePeeps.classList.remove("toad");
+      thisMolePeeps.classList.remove("coin");
+      thisMolePeeps.classList.remove("bomb");
+    }, 300);
     // if (gameIsOn) {
     //   molePeeps();
     // }
   }, timer);
+ 
 }
 
 // Chronometer Function
@@ -79,16 +96,22 @@ let countdownChrono = () => {
   intervalIdChrono = setInterval(() => {
     chrono.textContent = --timeRemaining;
     if (timeRemaining === 0) {
+      mainMusic.pause();
+      successMusic.play();
+      setTimeout(() => {
+        winMusic.play();
+      }, 5500);
       gameOver();
+      alert(`Well Done ! your score is ${score.textContent}` )
     }
   }, 1000);
 };
 
 function gameOver() {
   gameIsOn = false;
-  clearIntervals()
-  alert("GAME OVER");
+  clearIntervals();
 }
+
 
 function clearIntervals() {
   clearInterval(intervalIdChrono);
@@ -98,19 +121,24 @@ function clearIntervals() {
 window.onbeforeunload = clearIntervals;
 
 // Function hit : add points when click event, mole goes down
-function hitTheMole() {
-  const currentMole = randomMole();
-  // moles.classList.contains("up");
+function hitTheMole(e) {
+  const currentMole = e.target;
   let modifier = 0;
   let currentScore = Number(score.textContent);
   console.log(currentMole);
 
-  if (currentMole.classList.contains("toad")) {
+  if (currentMole.classList.contains("toad", "up")) {
     modifier = 1;
-  } else if (currentMole.classList.contains("bomb")) {
-    modifier = -10;
-    // gameOver();
-  } else if (currentMole.classList.contains("coin")) {
+  } else if (currentMole.classList.contains("bomb", "up")) {
+    hitBomb.play();
+    gameOver();
+    mainMusic.pause();
+    setTimeout(() => {
+      loseMusic.play();
+    }, 4000);
+    alert("Oh no ! You hit a BOMB !!!");
+  } else if (currentMole.classList.contains("coin", "up")) {
+    hitCoin.play();
     modifier = 10;
   } 
   currentMole.classList.remove("up");
@@ -119,47 +147,16 @@ function hitTheMole() {
 
 // Function start game, enables molePeeps until chrono = 0
 
-function play() {
+function playGame() {
   gameIsOn = true;
   countdownChrono();
   molePeeps();
   moles.forEach((mole) => {
     mole.addEventListener("click", hitTheMole);
   });
-  intervalIdMoles =  setInterval(molePeeps, 1000)
+  intervalIdMoles =  setInterval(molePeeps, 1200)
 }
 
 console.log(moles);
 
-startBtn.addEventListener("click", play);
-
-// function gameOver() {
-//     timeRemaining = 10;
-//     score = defaultScore;
-//     gameIsOn = false;
-//     clearInterval
-// }
-
-// resetBtn.addEventListener("click", reset);
-
-// start.addEventListener("click", play());
-
-// play();
-
-// const revealBitchSection = () => {
-//     bitchSection.classList.toggle("hidden")
-//   }
-
-//   magicBtn.addEventListener("click", revealBitchSection)
-
-/* <aside class="right-elements">
-    <div class="audio">
-        <audio autoplay="" loop="" id="background-music" src="./style/music/mitchrineko.mp3"></audio>
-        <button id="play" onclick="document.getElementById('background-music').play()"><img src="./style/img/Play_icon.svg" alt=""></button>
-        <button id="pause" onclick="document.getElementById('background-music').pause()"><img src="./style/img/Pause_icon.svg" alt=""></button>
-    </div>
-                
-    <p><span>0</span>/20</p>
-    <p>fish found</p>
-                
- </aside> */
+startBtn.addEventListener("click", playGame);

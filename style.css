@@ -31,6 +31,7 @@ header {
     flex-direction: column;
     justify-content: center;
     position: relative;
+    width: 700px;
 /* position: absolute; */
 }
 
@@ -59,8 +60,8 @@ header {
     justify-content: space-around;
     align-items: center;
     position: relative;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .hole {
@@ -89,7 +90,7 @@ header {
     background: url('./images/Toad.svg');
     position: absolute;
     top: 100%;
-    transition: top 0.3s ease-in;
+    transition: top 0.2s ease-in;
     width: 150px;
     height: 150px;
     margin-left: 50px;
@@ -102,7 +103,7 @@ header {
     background: url('./images/Bomb.svg');
     position: absolute;
     top: 100%;
-    transition: top 0.3s ease-in;
+    transition: top 0.2s ease-in;
     width: 150px;
     height: 150px;
     margin-left: 65px;
@@ -115,7 +116,7 @@ header {
     background: url('./images/Coin1150px.png');
     position: absolute;
     top: 100%;
-    transition: top 0.3s ease-in;
+    transition: top 0.2s ease-in;
     width: 150px;
     height: 150px;
     margin-left: 50px;
