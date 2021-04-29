@@ -14,7 +14,7 @@ let gameIsOn = true;
 
 // Select a random hole for the mole to pop up, using a random index
 function randomHole() {
-  const holeIndex = Math.floor(Math.random() * 9);
+  const holeIndex = Math.floor(Math.random() * 6);
   const selectedHole = holes[holeIndex];
   console.log("which hole ??????", selectedHole);
   return selectedHole;
@@ -92,7 +92,7 @@ function gameOver() {
 
 function clearIntervals() {
   clearInterval(intervalIdChrono);
-  clearInterval(intervalIdMoles)
+  clearInterval(intervalIdMoles);
 }
 
 window.onbeforeunload = clearIntervals;

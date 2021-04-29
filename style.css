@@ -9,27 +9,43 @@ body {
     font-family: "Mario";
     font-size: 30px;
     background-image: url("./images/Stamp_Background_Artwork_-_Super_Mario_3D_World.png");
-    background-size: 50%;
+    background-size: 60%;
+    margin: 0;
 }
 
 header {
     /* padding-bottom: 20px;
     padding-left: 50px; */
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 38%;
+    padding-right: 5%;
 }
 
-aside {
-    font-size: 35px;
-    position: absolute;
+#main {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+/* position: absolute; */
+}
+
+#infos {
+    margin-left: 7%;
 }
 
 /* #score {
     padding-right:70px;
 } */
+
+#score {
+    padding-right: 25px;
+    position: inherit;
+}
 
 .button {
     width: 50px;
@@ -37,32 +53,22 @@ aside {
 }
 
 #grid {
-    position: relative;
-    width: 756px;
-    height: auto;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-bottom: 15%;
-}
-
-footer {
-    height: 100px;
+    position: relative;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .hole {
     width: 250px;
     height: 250px;
     margin-top: 20px;
-    /* z-index: 3; */
-    /* border: solid black 1px; */
     position: relative;
-    overflow: hidden;
-    /* background: url("./pipe150px.svg")bottom center no-repeat; */
-    
+    overflow: hidden;    
 }
 
 .hole:after {
@@ -82,7 +88,7 @@ footer {
     background-color: white;
     background: url('./images/Toad.svg');
     position: absolute;
-    top: 95%;
+    top: 100%;
     transition: top 0.3s ease-in;
     width: 150px;
     height: 150px;
