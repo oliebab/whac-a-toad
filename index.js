@@ -4,6 +4,8 @@ const chrono = document.getElementById("chrono");
 const score = document.getElementById("score");
 const startBtn = document.getElementById("start-btn");
 const resetBtn = document.getElementById("reset-btn");
+const tryAgain = document.getElementById("tryAgain");
+const finalScore = document.getElementById("finalScore");
 
 //audio elements
 const mainMusic = document.getElementById("music");
@@ -12,7 +14,6 @@ const successMusic = document.getElementById("success-music");
 const loseMusic = document.getElementById("lose-music");
 const hitBomb = document.getElementById("bomb-music");
 const hitCoin = document.getElementById("coin-music");
-//  
 
 
 let intervalIdChrono;
@@ -50,7 +51,6 @@ function randomMole() {
   ];
 
   const mole = currentHole.querySelector(".mole");
-  // mole.className = "mole";
 
   let randomizer = possibilitiesArray[moleIndex];
   if (randomizer === "toad") {
@@ -60,7 +60,6 @@ function randomMole() {
   } else if (randomizer === "coin") {
     mole.classList.add("coin"); 
   }
-  //console.log("which type of mole ?????", currentMole);
   return mole;
 }
 
@@ -83,9 +82,6 @@ function molePeeps() {
       thisMolePeeps.classList.remove("coin");
       thisMolePeeps.classList.remove("bomb");
     }, 300);
-    // if (gameIsOn) {
-    //   molePeeps();
-    // }
   }, timer);
  
 }
@@ -100,17 +96,12 @@ let countdownChrono = () => {
       successMusic.play();
       setTimeout(() => {
         winMusic.play();
-      }, 5500);
+      }, 3500);
       gameOver();
-      alert(`Well Done ! your score is ${score.textContent}` )
+      // alert(`Well Done ! your score is ${score.textContent}` )
     }
   }, 1000);
 };
-
-function gameOver() {
-  gameIsOn = false;
-  clearIntervals();
-}
 
 
 function clearIntervals() {
@@ -135,8 +126,7 @@ function hitTheMole(e) {
     mainMusic.pause();
     setTimeout(() => {
       loseMusic.play();
-    }, 4000);
-    alert("Oh no ! You hit a BOMB !!!");
+    }, 1600);
   } else if (currentMole.classList.contains("coin", "up")) {
     hitCoin.play();
     modifier = 10;
@@ -160,3 +150,25 @@ function playGame() {
 console.log(moles);
 
 startBtn.addEventListener("click", playGame);
+
+
+// when game ends, call this function
+function gameOver() {
+  tryAgain.classList.remove("hidden");
+  finalScore.textContent = score.textContent;
+  gameIsOn = false;
+  clearIntervals();
+}
+
+// when Try again button is clicked at the end of the game
+function tryItAgain() {
+  tryAgain.classList.add("slide-out-bck-top");
+  setTimeout(() => {
+    tryAgain.classList.add("hidden");
+    setTimeout(() => {
+      window.location.reload();
+    }, 50);
+  }, 900);
+}
+
+tryAgainBtn.addEventListener("click", tryItAgain)
