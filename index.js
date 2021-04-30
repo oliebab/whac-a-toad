@@ -18,7 +18,7 @@ const hitCoin = document.getElementById("coin-music");
 
 let intervalIdChrono;
 let intervalIdMoles;
-let timeRemaining = 5;
+let timeRemaining = 45;
 let defaultScore = 0;
 let gameIsOn = true;
 
@@ -144,7 +144,7 @@ function playGame() {
   moles.forEach((mole) => {
     mole.addEventListener("click", hitTheMole);
   });
-  intervalIdMoles =  setInterval(molePeeps, 1200)
+  intervalIdMoles =  setInterval(molePeeps, 1200);
 }
 
 console.log(moles);
